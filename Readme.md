@@ -20,7 +20,7 @@ A lightweight flat-file database system built in Python.
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/DataSerpent.git
+git clone https://github.com/Gojibodev/dataSerpent.git
 cd DataSerpent
 ```
 
