@@ -17,6 +17,27 @@ def create_table(table_name, columns):
     # Write the header to a new file
     with open(table_name + FILE_EXTENSION, 'w') as file:
         file.write(header + "\n")
+        
+def show_tables():
+    """
+    Display all available tables (databases) in the current directory.
+    """
+    # Get all files with .csv extension
+    tables = [f[:-len(FILE_EXTENSION)] for f in os.listdir() if f.endswith(FILE_EXTENSION)]
+
+    # Calculate width for the box
+    max_len = max(len(table) for table in tables) if tables else 0
+    box_width = max_len + 4  # Add padding
+
+    # Print the ASCII box with table names
+    print("+" + "-" * box_width + "+")
+    print("|"+ "-"*(box_width /2)+ "Tables" + "-"*(box_width /2) + "|")
+    print("+" + "-" * box_width + "+")
+    for table in tables:
+        padding = (box_width - len(table)) // 2
+        print("|" + " " * padding + table + " " * (box_width - len(table) - padding) + "|")
+    print("+" + "-" * box_width + "+")
+
 
 def insert(table_name, record):
     """
@@ -91,23 +112,24 @@ def delete(table_name, criteria):
         file.write("\n".join(records_to_keep))
 
 # Tests
-create_table("users", {"name": "string", "age": "int"})
-insert("users", {"name": "Alice", "age": 29})
-insert("users", {"name": "Bob", "age": 30})
+# create_table("users", {"name": "string", "age": "int"})
+# insert("users", {"name": "Alice", "age": 29})
+# insert("users", {"name": "Bob", "age": 30})
 
 
 def cli_program():
     while True:
         # Display the main menu
-        print("\nSimple DBMS CLI")
+        print("\nDataserpent")
         print("1. Create Table")
         print("2. Insert Record")
         print("3. Query Records")
         print("4. Delete Records")
-        print("5. Exit")
+        print("5. Show Tables")
+        print("6. Exit")
         
         # Get user choice
-        choice = input("\nChoose an option (1-5): ")
+        choice = input("\nChoose an option (1-6): ")
         
         if choice == "1":
             # Create Table
@@ -143,7 +165,10 @@ def cli_program():
             delete(table_name, criteria)
             print(f"Records matching criteria deleted from '{table_name}' successfully!")
         
-        elif choice == "5":
+        elif choice == "5":  # Add a new option for SHOW
+            show_tables()
+            
+        elif choice == "6":
             # Exit
             print("Goodbye!")
             break

@@ -64,6 +64,8 @@ When prompted by the CLI:
 
 Pull requests are welcome! For major changes, please open an issue first to discuss what you'd like to change. Make sure to update tests as appropriate.
 
+## Changelog
+- v 0.1 : Added SHOW to see all DBs
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
